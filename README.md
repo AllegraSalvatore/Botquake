@@ -50,7 +50,7 @@ In particolare, le funzionalità previste comprendono:
 - **Restituzione delle informazioni:** visualizzazione dei principali parametri associati all'evento sismico individuato.
 - **Rappresentazione cartografica:** generazione di una mappa per la localizzazione geografica dell'evento, con indicazione della relativa magnitudo.
 
-## 5. Tecnologie e dipendenze
+## 5. Tecnologie e dipendenze software
 
 Il progetto è sviluppato utilizzando il linguaggio di programmazione Python e si avvale della libreria `python-telegram-bot` per l'integrazione con le API di Telegram.
 
@@ -85,25 +85,49 @@ L'installazione della libreria principale può essere effettuata mediante il pac
 pip install python-telegram-bot==13.13
 ```
 
-## 6. Configurazione e inizializzazione
+## 6. Interfaccia utente e configurazione del sistema
 
-Per utilizzare Botquake è necessario predisporre un bot Telegram mediante il servizio ufficiale BotFather, responsabile della registrazione e della configurazione delle applicazioni bot sulla piattaforma.
+### 6.1 Interfaccia grafica e interazione con il bot
 
-### 6.1 Creazione del bot
+L'interazione con Botquake avviene attraverso l'interfaccia conversazionale messa a disposizione dalla piattaforma Telegram. L'utente può impartire comandi direttamente all'interno della chat, ricevendo in risposta le informazioni elaborate dall'applicazione.
 
-La procedura di registrazione può essere avviata accedendo a Telegram, attraverso il client desktop o mobile, e individuando il servizio ufficiale BotFather.
+Le figure seguenti illustrano alcuni esempi dell'interfaccia utente e delle modalità di interazione con il sistema.
 
-Attraverso l'interfaccia conversazionale è possibile avviare la creazione di una nuova applicazione bot, specificandone il nome identificativo e lo username.
+![Interfaccia iniziale di Botquake](images/botquake_01.jpg)
 
-Quest'ultimo deve rispettare le convenzioni previste dalla piattaforma Telegram e terminare con il suffisso `bot`.
+*Figura 1 – Interfaccia conversazionale di Botquake all'interno del client Telegram.*
 
-### 6.2 Generazione del token di autenticazione
+![Visualizzazione delle informazioni sismologiche](images/botquake_02.jpg)
 
-Al termine della procedura di registrazione, BotFather genera un token di autenticazione associato all'applicazione.
+*Figura 2 – Esempio di visualizzazione delle informazioni relative a un evento sismico.*
 
-Tale credenziale consente al software di autenticarsi presso le API di Telegram e costituisce un requisito indispensabile per instaurare la comunicazione tra Botquake e l'infrastruttura della piattaforma.
+### 6.2 Creazione e registrazione del bot tramite BotFather
 
-**Nota di sicurezza:** il token di autenticazione deve essere considerato una credenziale riservata. Non deve essere pubblicato all'interno del repository né condiviso con soggetti non autorizzati.
+Per poter utilizzare l'applicazione è necessario creare preventivamente un bot Telegram attraverso il servizio ufficiale BotFather, disponibile all'indirizzo https://t.me/BotFather.
+
+La procedura può essere eseguita sia attraverso il client desktop sia mediante l'applicazione mobile di Telegram.
+
+![Ricerca del servizio BotFather](images/botfather_01.jpg)
+
+*Figura 3 – Individuazione del servizio BotFather all'interno della piattaforma Telegram.*
+
+Una volta avviata la conversazione con BotFather, è possibile procedere alla registrazione di una nuova applicazione mediante l'apposito comando.
+
+Durante questa fase vengono richiesti il nome identificativo del bot e il relativo username, che deve rispettare le convenzioni stabilite da Telegram e terminare con il suffisso `bot`.
+
+![Procedura di creazione del bot](images/botfather_02.jpg)
+
+*Figura 4 – Procedura di registrazione e configurazione iniziale del bot tramite BotFather.*
+
+### 6.3 Generazione e gestione del token di autenticazione
+
+Al termine della procedura di registrazione, BotFather genera un token di autenticazione univoco associato al bot creato.
+
+Tale token rappresenta la credenziale necessaria per consentire all'applicazione Botquake di autenticarsi presso le API di Telegram e instaurare il canale di comunicazione con la piattaforma.
+
+Il token deve essere conservato in modo sicuro e non deve essere divulgato o inserito direttamente all'interno di file pubblicamente accessibili.
+
+La corretta configurazione di questa credenziale costituisce un prerequisito indispensabile per il funzionamento dell'applicazione.
 
 ## 7. Riferimenti
 
