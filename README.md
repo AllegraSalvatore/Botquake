@@ -1,137 +1,111 @@
 # Botquake
-## Sistema di monitoraggio e consultazione degli eventi sismici nell'area etnea mediante Telegram
+### Sistema automatizzato per la consultazione degli eventi sismici nell'area etnea mediante Telegram
 
-### 1. Introduzione
+## 1. Introduzione
 
-**Botquake** è un progetto software sviluppato nell'ambito del corso di *Quality Development*, finalizzato alla realizzazione di un sistema automatizzato per la consultazione delle informazioni relative agli eventi sismici registrati nell'area etnea.
+Botquake è un progetto software finalizzato alla progettazione e alla realizzazione di un'applicazione basata sull'integrazione con la piattaforma di messaggistica Telegram.
 
-Il progetto si basa sull'integrazione tra la piattaforma di messaggistica Telegram e i dati sismologici resi disponibili dall'Istituto Nazionale di Geofisica e Vulcanologia (INGV). L'obiettivo è fornire agli utenti uno strumento di consultazione accessibile, attraverso un'interfaccia conversazionale, che consenta di ottenere informazioni sugli eventi sismici di interesse.
+Il sistema si propone di fornire uno strumento automatizzato per la consultazione delle informazioni relative agli eventi sismici, attraverso un'interfaccia conversazionale che consente agli utenti di interagire con un servizio applicativo dedicato. L'ambito geografico di interesse è circoscritto all'area etnea, con l'obiettivo di facilitare l'accesso alle informazioni sismologiche relative a tale territorio.
 
-### 2. Obiettivi del progetto
+## 2. Obiettivi progettuali
 
-L'obiettivo principale di Botquake consiste nello sviluppo di un bot Telegram in grado di acquisire, elaborare e restituire informazioni relative agli eventi sismici registrati nell'area geografica dell'Etna.
+L'obiettivo principale consiste nella realizzazione di un *bot Telegram*, ossia un'applicazione software in grado di ricevere, elaborare e gestire richieste provenienti dagli utenti attraverso l'infrastruttura di comunicazione della piattaforma Telegram.
 
-In particolare, il sistema è progettato per offrire le seguenti funzionalità:
+Dal punto di vista architetturale, l'applicazione viene eseguita su una macchina esterna all'infrastruttura di Telegram, assumendo il ruolo di componente applicativo responsabile dell'elaborazione delle richieste ricevute.
 
-- **Consultazione degli eventi sismici:** possibilità di richiedere informazioni relative all'ultimo evento sismico registrato nell'area geografica di interesse.
-- **Filtraggio per magnitudo:** possibilità di circoscrivere la ricerca mediante l'impostazione di un valore massimo di magnitudo.
-- **Visualizzazione delle informazioni:** restituzione dei principali dati associati all'evento sismico individuato.
-- **Rappresentazione geografica:** generazione di una mappa relativa alla localizzazione dell'evento, accompagnata dall'indicazione della magnitudo rilevata.
+Il modello di interazione previsto si articola secondo il seguente flusso operativo:
 
-### 3. Architettura e funzionamento del sistema
+1. L'utente impartisce un comando attraverso l'interfaccia di chat del client Telegram.
+2. La richiesta viene trasmessa attraverso i servizi di comunicazione della piattaforma Telegram.
+3. Il comando viene inoltrato all'applicazione Botquake, in esecuzione sulla macchina predisposta.
+4. L'applicazione interpreta ed elabora la richiesta, predisponendo una risposta coerente con il comando ricevuto.
+5. Il risultato dell'elaborazione viene trasmesso nuovamente attraverso le API di Telegram e reso disponibile all'utente mediante il client di messaggistica.
 
-Botquake adotta un'architettura basata sull'interazione tra un'applicazione Python eseguita localmente e l'infrastruttura di comunicazione messa a disposizione da Telegram.
+Tale architettura consente di separare il livello di interazione con l'utente dalla logica applicativa, delegando a Botquake la gestione delle funzionalità specifiche del servizio.
 
-L'applicazione svolge il ruolo di componente applicativo incaricato di ricevere le richieste degli utenti, elaborare i comandi impartiti e predisporre le relative risposte.
+## 3. Specifiche dell'applicazione
 
-Il processo di interazione può essere schematizzato nelle seguenti fasi:
+L'applicazione Botquake è progettata per acquisire ed elaborare le informazioni sismologiche pubblicate dall'Istituto Nazionale di Geofisica e Vulcanologia (INGV), disponibili attraverso il portale istituzionale:
 
-1. L'utente invia un comando attraverso l'interfaccia di Telegram.
-2. La richiesta viene gestita attraverso le API della piattaforma Telegram.
-3. L'applicazione Botquake, in esecuzione sull'ambiente locale, riceve ed elabora il comando.
-4. Il sistema acquisisce e analizza le informazioni sismologiche pertinenti.
-5. I risultati vengono restituiti all'utente attraverso la chat Telegram.
-6. A corredo delle informazioni testuali, viene fornita una rappresentazione cartografica della localizzazione dell'evento sismico.
+https://terremoti.ingv.it/
 
-### 4. Sorgente dei dati sismologici
-
-Il sistema utilizza le informazioni pubblicate sul portale ufficiale dell'Istituto Nazionale di Geofisica e Vulcanologia (INGV):
-
-- Portale istituzionale: https://terremoti.ingv.it/
-
-I dati disponibili comprendono informazioni relative agli eventi sismici registrati attraverso differenti reti di monitoraggio.
-
-Ai fini del progetto, il dominio geografico di interesse viene circoscritto all'area etnea, in modo da rendere la consultazione maggiormente pertinente al contesto territoriale considerato.
-
-Le informazioni utilizzate sono distribuite secondo la licenza **Creative Commons Attribution 4.0 International (CC BY 4.0)**, che ne consente il riutilizzo nel rispetto degli obblighi di attribuzione della fonte.
+Le informazioni utilizzate sono rese disponibili dall'INGV secondo i termini della licenza *Creative Commons Attribution 4.0 International (CC BY 4.0)*, che ne consente la condivisione e il riutilizzo, anche in ambito applicativo, nel rispetto degli obblighi di attribuzione della fonte.
 
 Riferimento alla licenza: https://creativecommons.org/licenses/by/4.0/
 
-### 5. Interazione con il sistema
+Il database di riferimento comprende informazioni relative agli eventi sismici rilevati attraverso differenti reti di monitoraggio sismologico, distribuite su scala nazionale e internazionale.
 
-L'interazione con Botquake avviene mediante un insieme di comandi impartiti direttamente attraverso la chat Telegram.
+Considerata la finalità applicativa del progetto, il dominio geografico di analisi viene circoscritto all'area etnea. Tale delimitazione consente di concentrare l'elaborazione sui fenomeni sismici di maggiore interesse per il contesto territoriale individuato, riducendo l'ambito di consultazione rispetto alla totalità degli eventi disponibili nel database.
 
-L'utente può richiedere informazioni sull'evento sismico più recente registrato nell'area di interesse oppure specificare un parametro di magnitudo massima per affinare i criteri di ricerca.
+Il sistema si pone pertanto l'obiettivo di rendere maggiormente accessibili le informazioni sismologiche relative al territorio etneo, attraverso un'interfaccia di consultazione semplice e immediata, integrata direttamente nell'ambiente Telegram.
 
-A seguito dell'elaborazione della richiesta, il sistema restituisce le informazioni relative all'evento individuato, integrandole con una rappresentazione cartografica che ne evidenzia la posizione geografica e il valore di magnitudo.
+## 4. Funzionalità principali
 
-#### 5.1 Esempio di interazione
+Il sistema mette a disposizione funzionalità per la consultazione degli eventi sismici registrati nell'area geografica di interesse.
 
-Di seguito vengono riportate alcune schermate esemplificative dell'interazione tra l'utente e il sistema.
+In particolare, le funzionalità previste comprendono:
 
-![Esempio di interazione con Botquake](images/botquake_01.jpg)
+- **Consultazione degli eventi sismici:** individuazione e visualizzazione dell'evento sismico più recente registrato nell'area etnea.
+- **Filtraggio per magnitudo:** possibilità di limitare la ricerca degli eventi mediante la specificazione di una soglia massima di magnitudo.
+- **Restituzione delle informazioni:** visualizzazione dei principali parametri associati all'evento sismico individuato.
+- **Rappresentazione cartografica:** generazione di una mappa per la localizzazione geografica dell'evento, con indicazione della relativa magnitudo.
 
-*Figura 1 – Interfaccia conversazionale del bot Telegram.*
+## 5. Tecnologie e dipendenze
 
-![Visualizzazione dei risultati](images/botquake_02.jpg)
+Il progetto è sviluppato utilizzando il linguaggio di programmazione Python e si avvale della libreria `python-telegram-bot` per l'integrazione con le API di Telegram.
 
-*Figura 2 – Esempio di restituzione delle informazioni relative a un evento sismico.*
+La libreria consente di gestire la comunicazione tra il bot e la piattaforma di messaggistica, permettendo la ricezione dei comandi e la restituzione delle risposte agli utenti.
 
-### 6. Configurazione e inizializzazione del bot
-
-La creazione e la configurazione dell'applicazione Telegram richiedono l'utilizzo del servizio ufficiale **BotFather**, attraverso il quale è possibile registrare un nuovo bot e ottenere le credenziali necessarie alla comunicazione con le API della piattaforma.
-
-#### 6.1 Registrazione del bot tramite BotFather
-
-Per inizializzare il bot è necessario accedere a Telegram, utilizzando il client desktop oppure quello mobile, e individuare il servizio BotFather.
-
-![Ricerca di BotFather](images/botfather_01.jpg)
-
-Attraverso l'interfaccia conversazionale di BotFather è possibile avviare la procedura di creazione di una nuova applicazione bot.
-
-Durante questa fase vengono definiti:
-
-- Il nome identificativo del bot.
-- Lo username associato all'applicazione, che deve terminare con il suffisso `bot`.
-
-La procedura guidata consente di completare la registrazione e rendere disponibile il bot sulla piattaforma Telegram.
-
-![Configurazione del bot tramite BotFather](images/botfather_02.jpg)
-
-#### 6.2 Generazione del token di autenticazione
-
-Al termine della procedura di registrazione, BotFather genera un token di autenticazione associato al bot.
-
-Tale credenziale consente all'applicazione di autenticarsi presso le API di Telegram e costituisce un elemento necessario per instaurare la comunicazione tra il software Botquake e l'infrastruttura della piattaforma.
-
-**Nota di sicurezza:** il token deve essere trattato come una credenziale riservata. Non deve essere pubblicato nel repository, condiviso con soggetti non autorizzati o inserito direttamente in file accessibili pubblicamente.
-
-### 7. Tecnologie e dipendenze software
-
-Lo sviluppo del progetto si basa sul linguaggio di programmazione Python e sull'utilizzo della libreria `python-telegram-bot`, che fornisce le funzionalità necessarie per interagire con le API di Telegram.
-
-La libreria costituisce il livello di integrazione tra l'applicazione locale e il servizio di messaggistica, consentendo la gestione dei comandi e lo scambio dei messaggi.
-
-#### 7.1 Requisiti di sistema
+### 5.1 Requisiti software
 
 | Componente | Versione |
 |---|---|
 | Python | 3.11.0 |
 | python-telegram-bot | 13.13 |
 
-#### 7.2 Verifica dell'ambiente di sviluppo
+### 5.2 Verifica dell'ambiente
 
-Per verificare la versione di Python installata nell'ambiente di sviluppo è possibile eseguire il seguente comando:
+Per verificare la versione di Python installata nel sistema è possibile utilizzare il seguente comando:
 
 ```bash
 python --version
 ```
 
-Per visualizzare l'elenco delle librerie Python installate:
+Per visualizzare le librerie installate nell'ambiente Python:
 
 ```bash
 pip3 list
 ```
 
-#### 7.3 Installazione della dipendenza principale
+### 5.3 Installazione delle dipendenze
 
-La libreria utilizzata dal progetto può essere installata mediante il package manager `pip`:
+L'installazione della libreria principale può essere effettuata mediante il package manager `pip`:
 
 ```bash
 pip install python-telegram-bot==13.13
 ```
 
-### 8. Riferimenti
+## 6. Configurazione e inizializzazione
+
+Per utilizzare Botquake è necessario predisporre un bot Telegram mediante il servizio ufficiale BotFather, responsabile della registrazione e della configurazione delle applicazioni bot sulla piattaforma.
+
+### 6.1 Creazione del bot
+
+La procedura di registrazione può essere avviata accedendo a Telegram, attraverso il client desktop o mobile, e individuando il servizio ufficiale BotFather.
+
+Attraverso l'interfaccia conversazionale è possibile avviare la creazione di una nuova applicazione bot, specificandone il nome identificativo e lo username.
+
+Quest'ultimo deve rispettare le convenzioni previste dalla piattaforma Telegram e terminare con il suffisso `bot`.
+
+### 6.2 Generazione del token di autenticazione
+
+Al termine della procedura di registrazione, BotFather genera un token di autenticazione associato all'applicazione.
+
+Tale credenziale consente al software di autenticarsi presso le API di Telegram e costituisce un requisito indispensabile per instaurare la comunicazione tra Botquake e l'infrastruttura della piattaforma.
+
+**Nota di sicurezza:** il token di autenticazione deve essere considerato una credenziale riservata. Non deve essere pubblicato all'interno del repository né condiviso con soggetti non autorizzati.
+
+## 7. Riferimenti
 
 - **Istituto Nazionale di Geofisica e Vulcanologia (INGV):** https://terremoti.ingv.it/
 - **Telegram:** https://telegram.org/
@@ -142,4 +116,4 @@ pip install python-telegram-bot==13.13
 
 ---
 
-*Botquake – Progetto sviluppato nell'ambito del corso di Quality Development.*
+*Botquake – Sistema software per la consultazione degli eventi sismici nell'area etnea.*
